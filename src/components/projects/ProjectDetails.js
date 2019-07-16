@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+import moment from "moment";
+import { logicalExpression } from "@babel/types";
 
 const ProjectDetails = props => {
 	const { project, auth } = props;
@@ -12,16 +14,20 @@ const ProjectDetails = props => {
 		return (
 			<div>
 				<div className="container section project-details">
-					<div className="card z-depth-0">
+					<div className="card z-depth-0 blue darken-2 ">
 						<div className="card-content">
-							<span className="card-title">{project.title}</span>
-							<p>{project.content}</p>
+							<span className="card-title grey-text text-lighten-1">
+								{project.title}
+							</span>
+							<p className="white-text">{project.content}</p>
 						</div>
-						<div className="card-action grey lighten-4 grey-text">
+						<div className="card-action grey lighten-2 grey-text text-darken-2">
 							<div className="">
 								Posted by {project.authorFirstName} {project.authorLastName}
 							</div>
-							<div className="">11th of July, 2pm</div>
+							<div className="">
+								{moment(project.createdAt.toDate().toString()).calendar()}
+							</div>
 						</div>
 					</div>
 				</div>
